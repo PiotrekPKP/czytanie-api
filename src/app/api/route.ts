@@ -52,6 +52,7 @@ export async function GET() {
       czytanie1: entireTextContent[0],
       psalm: entireTextContent[1],
       czytanie2: entireTextContent[2],
+      alleluja: null,
       ewangelia: entireTextContent[3],
     });
   } else {
