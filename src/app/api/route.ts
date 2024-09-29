@@ -51,8 +51,8 @@ export async function GET() {
       error: false,
       czytanie1: entireTextContent[0],
       psalm: entireTextContent[1],
-      czytanie2: entireTextContent[2],
-      alleluja: null,
+      czytanie2: null,
+      alleluja: entireTextContent[2],
       ewangelia: entireTextContent[3],
     });
   } else {
