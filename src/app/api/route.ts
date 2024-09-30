@@ -7,7 +7,7 @@ export async function GET() {
     .split("T")[0]
     .replaceAll("-", "")}.html`;
 
-  const res = await fetch(url);
+  const res = await fetch(url, { cache: "no-cache" });
   const htmlText = await res.text();
   const html = parse(htmlText);
 
