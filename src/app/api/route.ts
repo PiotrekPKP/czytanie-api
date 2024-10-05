@@ -1,11 +1,15 @@
+import { NextRequest } from "next/server";
 import { parse } from "node-html-parser";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const urlDateParam = request.nextUrl.searchParams.get("date");
+
   const currentDate = new Date();
-  const url = `https://mateusz.pl/czytania/${currentDate.getFullYear()}/${currentDate
-    .toISOString()
-    .split("T")[0]
-    .replaceAll("-", "")}.html`;
+  const url = `https://mateusz.pl/czytania/${currentDate.getFullYear()}/${
+    !urlDateParam
+      ? currentDate.toISOString().split("T")[0].replaceAll("-", "")
+      : urlDateParam
+  }.html`;
 
   const res = await fetch(url, { cache: "no-cache" });
   const htmlText = await res.text();
@@ -16,7 +20,7 @@ export async function GET() {
 
   const todayReadings = html
     .querySelector('a[href="#czytania"]')!
-    .text.split(";")
+    .text.split("; \r\n")
     .map((t) => t.replaceAll("\n", "").replaceAll("\r", "").trim())
     .filter(Boolean);
 
