@@ -5,6 +5,9 @@ export async function GET(request: NextRequest) {
   const urlDateParam = request.nextUrl.searchParams.get("date");
 
   const currentDate = new Date();
+  const timezoneOffset = currentDate.getTimezoneOffset();
+  currentDate.setMinutes(currentDate.getMinutes() - timezoneOffset);
+
   const url = `https://mateusz.pl/czytania/${currentDate.getFullYear()}/${
     !urlDateParam
       ? currentDate.toISOString().split("T")[0].replaceAll("-", "")
